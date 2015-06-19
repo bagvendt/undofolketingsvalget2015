@@ -20,7 +20,9 @@ module.exports = {
 	increment: function (req, res) {
 		var redis = GLOBAL._REDISCLIENT;
 		redis.incr("count", function(err, reply) {
-			return res.json({});
+			redis.get("count", function(err, reply) {
+				return res.json({count: reply});
+			});
 		});
 
 
@@ -28,9 +30,10 @@ module.exports = {
 
 	count: function (req, res) {
     //return res.ok("hurra");
-		return res.json({
-      count: 2,
-    });
+		var redis = GLOBAL._REDISCLIENT;
+		redis.get("count", function(err, reply) {
+			return res.json({count: reply});
+		});
   },
 
 };

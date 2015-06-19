@@ -8,11 +8,13 @@ window.onload = function(){
 var increment = function() {
   io.socket.post('/increment', function(data, jwres) {
     console.log(data);
+    document.getElementById("count").innerHTML = data.count;
   });
 };
 
 var update = function() {
   io.socket.get('/count', function(data, jwres) {
     console.log(data);
+    document.getElementById("count").innerHTML = data.count;
   });
 };
