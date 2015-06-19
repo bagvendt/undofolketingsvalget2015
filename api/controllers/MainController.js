@@ -20,7 +20,6 @@ module.exports = {
 	increment: function (req, res) {
 		var redis = GLOBAL._REDISCLIENT;
 		redis.incr("count", function(err, reply) {
-			sails.sockets.blast("increment", {count: reply});
 			return res.json({});
 		});
 
